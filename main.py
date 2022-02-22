@@ -2,6 +2,7 @@ import cv2 as cv
 import mediapipe as mp
 import time
 import numpy as np
+from palette import *
 
 cap = cv.VideoCapture(0)
 mpHands = mp.solutions.hands
@@ -17,11 +18,6 @@ mPos = (0,0)
 brushColor = (0,0,255)
 points = []
 
-
-def show_palette():
-    cv.rectangle(img, (0,0), (imgWidth, 100), (255,0,0), thickness=-1)
-    cv.rectangle(img, (int(imgWidth * 1 / 3),0), (int(imgWidth * 2 / 3), 100), (0,255,0), thickness=-1)
-    cv.rectangle(img, (int(imgWidth * 2 / 3),0), (imgWidth, 100), (0,0,255), thickness=-1)
 
 def show_fps():
     global pTime
@@ -74,7 +70,8 @@ while True:
         imgHeight = img.shape[0]
         imgWidth = img.shape[1]
         canvas = np.zeros(img.shape, dtype='uint8')
-        show_palette()
+        #normal_palette(img, imgWidth)
+        gradient_palette(img)
         palette_img = img.copy()
         show_hand()
         show_pointer()
